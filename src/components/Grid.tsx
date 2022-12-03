@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 
 const GRID_SIZE = 9;
 
@@ -18,26 +18,35 @@ const mutateGrid = (grid: grid, value: number, i: number, j: number): grid => {
     );
 };
 
+const isValidInput = (input: any) => {
+    return !Number.isNaN(parseInt(input));
+};
+
 export function Grid() {
     const [grid, setGrid] = useState(getGrid());
+    function getHandleChangeFunction(i: number, j: number) {
+        return function (e: SyntheticEvent) {
+            const data = (e.nativeEvent as InputEvent).data || "0";
+            if (!isValidInput(data)) return;
 
-    useEffect(() => {
-        setGrid((grid: grid) => {
-            return mutateGrid(grid, 5, 2, 5);
-        });
-    }, []);
+            setGrid((grid: grid) => mutateGrid(grid, parseInt(data), i, j));
+        };
+    }
 
     return (
         <div className="grid-container">
             {grid.map((row, rowIndex) => {
                 return row.map((element, elementIndex) => {
                     return (
-                        <div
+                        <textarea
+                            onInput={getHandleChangeFunction(
+                                elementIndex,
+                                rowIndex
+                            )}
                             key={rowIndex * GRID_SIZE + elementIndex}
                             className="grid-element"
-                        >
-                            {element}
-                        </div>
+                            value={element === 0 ? "" : element}
+                        ></textarea>
                     );
                 });
             })}
