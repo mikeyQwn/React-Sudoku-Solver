@@ -1,0 +1,18 @@
+.grid-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    font-size: 1.4em;
+}
+
+.grid-container {
+    display: grid;
+    margin: auto;
+    aspect-ratio: 1;
+    height: 70vmin;
+    border: 5px solid black;
+    background-color: black;
+    gap: 5px;
+    grid-template-columns: repeat(9, 1fr);
+}

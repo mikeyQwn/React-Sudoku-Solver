@@ -7,7 +7,7 @@ type grid = number[][];
 const getGrid = (): grid => {
     return new Array(GRID_SIZE)
         .fill([])
-        .map(() => new Array(GRID_SIZE).fill("0"));
+        .map(() => new Array(GRID_SIZE).fill(0));
 };
 
 const mutateGrid = (grid: grid, value: number, i: number, j: number): grid => {
@@ -28,10 +28,19 @@ export function Grid() {
     }, []);
 
     return (
-        <>
-            {grid.map((row, rowIndex) => (
-                <div key={rowIndex}>{row}</div>
-            ))}
-        </>
+        <div className="grid-container">
+            {grid.map((row, rowIndex) => {
+                return row.map((element, elementIndex) => {
+                    return (
+                        <div
+                            key={rowIndex * GRID_SIZE + elementIndex}
+                            className="grid-element"
+                        >
+                            {element}
+                        </div>
+                    );
+                });
+            })}
+        </div>
     );
 }
