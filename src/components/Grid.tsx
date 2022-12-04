@@ -22,6 +22,16 @@ const isValidInput = (input: any) => {
     return !Number.isNaN(parseInt(input));
 };
 
+const styleGridCell = (i: number, j: number) => {
+    const borderStyle = "3px solid black";
+    return {
+        borderTop: j % 3 === 0 ? borderStyle : "",
+        borderLeft: i % 3 === 0 ? borderStyle : "",
+        borderRight: i === 8 ? borderStyle : "",
+        borderBottom: j === 8 ? borderStyle : ""
+    };
+};
+
 export function Grid() {
     const [grid, setGrid] = useState(getGrid());
     function getHandleChangeFunction(i: number, j: number) {
@@ -39,6 +49,7 @@ export function Grid() {
                 return row.map((element, elementIndex) => {
                     return (
                         <textarea
+                            style={styleGridCell(elementIndex, rowIndex)}
                             onInput={getHandleChangeFunction(
                                 elementIndex,
                                 rowIndex
