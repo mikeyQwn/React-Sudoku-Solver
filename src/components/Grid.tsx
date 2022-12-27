@@ -1,4 +1,5 @@
 import { SyntheticEvent, useState } from "react";
+import { solveSudoku } from "../utils/sover";
 
 const GRID_SIZE = 9;
 
@@ -44,23 +45,32 @@ export function Grid() {
     }
 
     return (
-        <div className="grid-container">
-            {grid.map((row, rowIndex) => {
-                return row.map((element, elementIndex) => {
-                    return (
-                        <textarea
-                            style={styleGridCell(elementIndex, rowIndex)}
-                            onInput={getHandleChangeFunction(
-                                elementIndex,
-                                rowIndex
-                            )}
-                            key={rowIndex * GRID_SIZE + elementIndex}
-                            className="grid-element"
-                            value={element === 0 ? "" : element}
-                        ></textarea>
-                    );
-                });
-            })}
-        </div>
+        <>
+            <div className="grid-container">
+                {grid.map((row, rowIndex) => {
+                    return row.map((element, elementIndex) => {
+                        return (
+                            <textarea
+                                style={styleGridCell(elementIndex, rowIndex)}
+                                onInput={getHandleChangeFunction(
+                                    elementIndex,
+                                    rowIndex
+                                )}
+                                key={rowIndex * GRID_SIZE + elementIndex}
+                                className="grid-element"
+                                value={element === 0 ? "" : element}
+                            ></textarea>
+                        );
+                    });
+                })}
+            </div>
+            <button
+                onClick={() => {
+                    setGrid((grid) => [...solveSudoku(grid)]);
+                }}
+            >
+                Solve Sudoku
+            </button>
+        </>
     );
 }
