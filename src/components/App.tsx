@@ -11,7 +11,7 @@ const getGrid = (): grid => {
         .map(() => new Array(GRID_SIZE).fill(0));
 };
 export function App() {
-    const [grid, setGrid] = useState(getGrid());
+    const [grid, setGrid] = useState<grid>(getGrid());
 
     return (
         <main>

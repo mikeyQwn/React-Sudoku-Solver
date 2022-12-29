@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent } from "react";
 import { GRID_SIZE } from "./App";
 import { grid } from "./App";
 
@@ -26,7 +26,7 @@ const styleGridCell = (i: number, j: number) => {
 
 interface Props {
     grid: grid;
-    setGrid: (grid: grid) => void;
+    setGrid: React.Dispatch<React.SetStateAction<grid>>;
 }
 
 export function Grid({ grid, setGrid }: Props) {
