@@ -1,6 +1,5 @@
-type grid = number[][];
-
-const emptyGrid = [
+import { grid } from "../components/App";
+const emptyGrid: grid = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],

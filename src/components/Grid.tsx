@@ -1,15 +1,6 @@
 import { SyntheticEvent, useState } from "react";
-import { solveSudoku } from "../utils/sover";
-
-const GRID_SIZE = 9;
-
-type grid = number[][];
-
-const getGrid = (): grid => {
-    return new Array(GRID_SIZE)
-        .fill([])
-        .map(() => new Array(GRID_SIZE).fill(0));
-};
+import { GRID_SIZE } from "./App";
+import { grid } from "./App";
 
 const mutateGrid = (grid: grid, value: number, i: number, j: number): grid => {
     return grid.map((row, rowIndex) =>
@@ -33,8 +24,12 @@ const styleGridCell = (i: number, j: number) => {
     };
 };
 
-export function Grid() {
-    const [grid, setGrid] = useState(getGrid());
+interface Props {
+    grid: grid;
+    setGrid: (grid: grid) => void;
+}
+
+export function Grid({ grid, setGrid }: Props) {
     function getHandleChangeFunction(i: number, j: number) {
         return function (e: SyntheticEvent) {
             const data = (e.nativeEvent as InputEvent).data || "0";
@@ -64,13 +59,6 @@ export function Grid() {
                     });
                 })}
             </div>
-            <button
-                onClick={() => {
-                    setGrid((grid) => [...solveSudoku(grid)]);
-                }}
-            >
-                Solve Sudoku
-            </button>
         </>
     );
 }

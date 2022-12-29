@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom/client";
-import { Grid } from "./components/Grid";
+import { App } from "./components/App";
 import "./style.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-    <Grid />
+    <App></App>
 );
