@@ -7,10 +7,14 @@ interface Props {
 
 export function Controls({ setGrid }: Props) {
     return (
-        <button
-            onClick={() => {
-                setGrid((grid: grid): grid => [...solveSudoku(grid)]);
-            }}
-        ></button>
+        <div className="controls-container">
+            <button
+                onClick={() => {
+                    setGrid((grid: grid): grid => [...solveSudoku(grid)]);
+                }}
+            >
+                Solve Sudoku
+            </button>
+        </div>
     );
 }

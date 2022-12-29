@@ -14,7 +14,8 @@ export function App() {
     const [grid, setGrid] = useState<grid>(getGrid());
 
     return (
-        <main>
+        <main className="app-container">
+            <div></div>
             <Grid grid={grid} setGrid={setGrid} />
             <Controls setGrid={setGrid} />
         </main>
