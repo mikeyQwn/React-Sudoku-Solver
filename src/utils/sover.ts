@@ -35,17 +35,18 @@ const isGridSolved = (grid: grid) => {
 };
 
 export const solveSudoku = (grid: grid): grid => {
-    if (isGridSolved(grid)) return grid;
+    const gridCopy = grid.map((row) => [...row]);
+    if (isGridSolved(gridCopy)) return gridCopy;
 
     for (let row = 0; row < 9; row++) {
         for (let col = 0; col < 9; col++) {
-            if (grid[row][col] === 0) {
+            if (gridCopy[row][col] === 0) {
                 for (let value = 1; value <= 9; value++) {
-                    if (isValid(grid, row, col, value)) {
-                        grid[row][col] = value;
-                        const result = solveSudoku(grid);
+                    if (isValid(gridCopy, row, col, value)) {
+                        gridCopy[row][col] = value;
+                        const result = solveSudoku(gridCopy);
                         if (isGridSolved(result)) return result;
-                        grid[row][col] = 0;
+                        gridCopy[row][col] = 0;
                     }
                 }
                 return emptyGrid;
