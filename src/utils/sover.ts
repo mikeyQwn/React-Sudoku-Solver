@@ -15,12 +15,6 @@ const isGridCorrect = (grid: grid) => {
     return grid.every((row, rowIndex) => {
         return row.every((value, valueIndex) => {
             if (value === 0) return true;
-            console.log(
-                isValid(grid, rowIndex, valueIndex, value),
-                value,
-                rowIndex,
-                valueIndex
-            );
             return isValid(grid, rowIndex, valueIndex, value);
         });
     });
@@ -54,18 +48,15 @@ export const solveSudoku = (grid: grid): grid => {
 
     for (let row = 0; row < 9; row++) {
         for (let col = 0; col < 9; col++) {
-            if (gridCopy[row][col] === 0) {
-                for (let value = 1; value <= 9; value++) {
-                    if (isValid(gridCopy, row, col, value)) {
-                        gridCopy[row][col] = value;
-                        const result = solveSudoku(gridCopy);
-                        if (isGridSolved(result)) return result;
-                        gridCopy[row][col] = 0;
-                    }
-                }
-                console.log("returning empty grid");
-                return emptyGrid;
+            if (gridCopy[row][col] !== 0) continue;
+            for (let value = 1; value <= 9; value++) {
+                if (!isValid(gridCopy, row, col, value)) continue;
+                gridCopy[row][col] = value;
+                const result = solveSudoku(gridCopy);
+                if (isGridSolved(result)) return result;
+                gridCopy[row][col] = 0;
             }
+            return emptyGrid;
         }
     }
     return emptyGrid;
