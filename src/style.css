@@ -1,4 +1,4 @@
-body {
+html {
     font-size: 62.5%;
 }
 
@@ -26,9 +26,9 @@ body {
     margin: auto;
     aspect-ratio: 1;
     height: 70vmin;
-    border: 2px solid black;
+    border: 0.2rem solid black;
     background-color: black;
-    gap: 2px;
+    gap: 0.2rem;
     grid-template-columns: repeat(9, 1fr);
     grid-template-rows: repeat(9, 1fr);
 }
